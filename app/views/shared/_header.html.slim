@@ -1,0 +1,19 @@
+div.container
+  div.navbar-header.clearfix
+    = link_to 'FELS', root_path, {class: 'navbar-brand'}
+  nav.collapse.navbar-collapse
+    ul.nav.navbar-nav
+      li
+        = link_to 'Categories', categories_index_path
+
+    ul.nav.navbar-nav.navbar-right
+      - if current_user.present?
+        li
+          = link_to current_user.email, current_user
+        li
+          = link_to 'Sign out', destroy_user_session_path, method: :delete
+      - else
+        li
+          = link_to 'Sign up', new_user_registration_path
+        li
+          = link_to 'Sign in', new_user_session_path
