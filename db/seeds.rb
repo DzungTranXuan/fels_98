@@ -50,7 +50,7 @@ category_ids = Category.all.pluck(:id)
   word = Word.create({
       category_id:        category_ids.sample,
       text:               Faker::Lorem.word,
-      meaning:            Faker::Lorem.sentence(rand(2..4)),
+      meaning:            Faker::Lorem.word,
       pronunciation_file: nil
     })
   word.save!
@@ -60,7 +60,7 @@ category_ids = Category.all.pluck(:id)
   4.times do |i|
     choice = QuestionChoice.create({
         word_id:  word.id,
-        text:     correct_choice == i ? word.meaning : Faker::Lorem.sentence(rand(2..4)),
+        text:     correct_choice == i ? word.meaning : Faker::Lorem.word,
         correct:  correct_choice == i
       })
     choice.save!
@@ -80,11 +80,12 @@ puts "#{Word.count} words created together with question choices"
 
   words = Word.where(category_id: lesson.category_id).sample(lesson.number_of_questions)
 
-  words.each do |word|
+  words.each_with_index do |word, i|
     answer = UserAnswer.create({
         user_id:            lesson.user_id,
         word_id:            word.id,
         lesson_id:          lesson.id,
+        order:              i + 1,
         question_choice_id: QuestionChoice.where(word_id: word.id).sample.id
       })
     answer.save!

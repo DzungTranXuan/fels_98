@@ -21,3 +21,19 @@
 
 en:
   hello: "Hello world"
+
+  error:
+    general: "Error happend. Please try again later"
+
+  label:
+    start: "Start"
+    categories: "Categories"
+    sign_up: "Sign up"
+    sign_in: "Sign in"
+    sign_out: "Sign out"
+    progress: "Progress"
+    correct_answer: "Correct answer"
+    submit: "Submit"
+    previous: "Previous"
+    next: "Next"
+    view_result: "View result"

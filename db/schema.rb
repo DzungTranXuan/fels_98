@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207090106) do
+ActiveRecord::Schema.define(version: 20151208061853) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20151207090106) do
     t.integer  "question_choice_id", limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "order",              limit: 4
   end
 
   add_index "user_answers", ["lesson_id"], name: "index_user_answers_on_lesson_id", using: :btree

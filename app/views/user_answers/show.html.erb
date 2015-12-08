@@ -1,0 +1,65 @@
+<div id="answer_show">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>
+          <%= @answer.word.category.name %>
+        </h3>
+        <p>
+          <%= "#{t('label.progress')} #{@answer.order} / #{@answer.lesson.number_of_questions}" %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div id="word_info" class="text-center">
+          <h1>
+            <%= @answer.word.text %>
+          </h1>
+          <% if @answer.question_choice_id.present? %>
+            <div>
+              <%= "#{t('label.correct_answer')}: #{@answer.word.meaning}" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <% @answer.word.question_choices.each do |question_choice| %>
+          <button class="choice btn btn-default <%= "btn-primary" if @answer.question_choice_id == question_choice.id %>" data-id="<%= question_choice.id %>">
+            <%= question_choice.text %>
+          </button>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="actions" class="text-center">
+          <% if @answer.question_choice_id.blank? %>
+            <%= form_tag lesson_update_answer_path(@answer.lesson_id, @answer.order), method: :put do %>
+              <%= hidden_field_tag 'choice_id' %>
+              <%= submit_tag t("label.submit"), id: "answer_submit_btn", class: "btn btn-primary btn-lg", disabled: true %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="navigation" class="text-right">
+          <% if @answer.order > 1 %>
+            <%= link_to t("label.previous"), lesson_show_question_path(@answer.lesson_id, @answer.order - 1) %>
+          <% end %>
+
+          <% if @answer.order < @answer.lesson.number_of_questions %>
+            <%= link_to t("label.next"), lesson_show_question_path(@answer.lesson_id, @answer.order + 1) %>
+          <% else %>
+            <%= link_to t("label.view_result"), lesson_result_path(@answer.lesson_id) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

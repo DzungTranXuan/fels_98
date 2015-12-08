@@ -12,6 +12,12 @@ Rails.application.routes.draw do
 
   get 'categories/index'
 
+  resources :lessons, only: [:create] do
+    get 'result'
+    get 'user_answers/:order' => 'user_answers#show', as: :show_question
+    put 'user_answers/:order' => 'user_answers#update', as: :update_answer
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
