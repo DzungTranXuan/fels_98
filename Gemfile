@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'slim-rails'
+# gem 'slim-rails'
 gem 'devise'
 gem 'mysql2'
 gem 'bullet'

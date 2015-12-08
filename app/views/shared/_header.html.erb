@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="navbar-header clearfix">
+    <%= link_to 'FELS', root_path, {class: 'navbar-brand'} %>
+  </div>
+  <nav class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li>
+        <%= link_to 'Categories', categories_index_path %>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user.present? %>
+        <li>
+          <%= link_to current_user.email, current_user %>
+        </li>
+        <li>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to 'Sign up', new_user_registration_path %>
+        </li>
+        <li>
+          <%= link_to 'Sign in', new_user_session_path %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

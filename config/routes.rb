@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  get 'categories/index'
+  root 'home#index'
 
   devise_for :admins
   devise_for :users
 
-  root 'home#index'
   get 'home/index'
-
 
   resources :users do
     get 'show'
