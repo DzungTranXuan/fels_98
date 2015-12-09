@@ -10,11 +10,9 @@ puts 'SEEDING...'
 
 ###### ========================================================================
 
-users = User.create([
-    {email: 'user@framgia.com', password: '12345678'}
-  ])
-
-users.each { |user| user.save! }
+5.times do |i|
+  user = User.create({email: "user#{i}@framgia.com", password: '12345678'})
+end
 
 puts "#{User.count} users created"
 
@@ -22,11 +20,9 @@ user_ids = User.all.pluck(:id)
 
 ###### ========================================================================
 
-admins = Admin.create([
-    {email: 'admin@framgia.com', password: '12345678'}
-  ])
-
-admins.each { |admin| admin.save! }
+2.times do |i|
+  admin = Admin.create({email: "admin#{i}@framgia.com", password: '12345678'})
+end
 
 puts "#{Admin.count} admins created"
 
@@ -37,8 +33,6 @@ categories = Category.create([
     {name: 'Essential 1000', cover_photo: '2.jpg'},
     {name: 'Usual 3000', cover_photo: '3.jpg'}
   ])
-
-categories.each { |category| category.save! }
 
 puts "#{Category.count} categories created"
 
@@ -53,7 +47,6 @@ category_ids = Category.all.pluck(:id)
       meaning:            Faker::Lorem.word,
       pronunciation_file: nil
     })
-  word.save!
 
   correct_choice = rand(0..3)
 
@@ -63,7 +56,6 @@ category_ids = Category.all.pluck(:id)
         text:     correct_choice == i ? word.meaning : Faker::Lorem.word,
         correct:  correct_choice == i
       })
-    choice.save!
   end
 end
 
@@ -76,7 +68,6 @@ puts "#{Word.count} words created together with question choices"
       category_id:  category_ids.sample,
       user_id:      user_ids.sample
     })
-  lesson.save!
 
   words = Word.where(category_id: lesson.category_id).sample(lesson.number_of_questions)
 
@@ -88,11 +79,22 @@ puts "#{Word.count} words created together with question choices"
         order:              i + 1,
         question_choice_id: QuestionChoice.where(word_id: word.id).sample.id
       })
-    answer.save!
   end
 end
 
 puts "#{Lesson.count} lessons created together with user answers"
+
+###### ========================================================================
+
+10.times do
+  activity = Activity.create({
+      user_id:    user_ids.sample,
+      type_name:  'learn',
+      content:    'learnt 10 words in Basic 500'
+    })
+end
+
+puts "#{Activity.count} activities created"
 
 ###### ========================================================================
 

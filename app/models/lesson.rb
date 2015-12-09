@@ -21,4 +21,18 @@ class Lesson < ActiveRecord::Base
       end
     )
   end
+
+  def finish
+    if self.get_number_of_correct_answers > 0
+      Activity.add({
+        type: "learn",
+        user_id: self.user_id,
+        content: I18n.t("activity.learnt_n_words_in_lesson_x", n: correct_num, x: self.category.name)
+      })
+    end
+  end
+
+  def get_number_of_correct_answers
+    self.user_answers.where(correct: true).count
+  end
 end

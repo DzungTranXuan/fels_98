@@ -6,16 +6,21 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  resources :users do
-    get 'show'
+  resources :words, only: [:index]
+
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      post 'follow'
+      delete 'unfollow'
+    end
   end
 
-  get 'categories/index'
+  resources :categories, only: [:index]
 
   resources :lessons, only: [:create] do
     get 'result'
-    get 'user_answers/:order' => 'user_answers#show', as: :show_question
-    put 'user_answers/:order' => 'user_answers#update', as: :update_answer
+    get 'user_answers/:order' => 'user_answers#show', as: :user_answer
+    put 'user_answers/:order' => 'user_answers#update', as: :update_user_answer
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

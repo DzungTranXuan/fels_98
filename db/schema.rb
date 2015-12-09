@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208061853) do
+ActiveRecord::Schema.define(version: 20151209095015) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "type_name",  limit: 255
+    t.string   "content",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -37,6 +47,16 @@ ActiveRecord::Schema.define(version: 20151208061853) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "followings", force: :cascade do |t|
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "follower_id",      limit: 4
+    t.integer  "followed_user_id", limit: 4
+  end
+
+  add_index "followings", ["followed_user_id"], name: "index_followings_on_followed_user_id", using: :btree
+  add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "category_id",         limit: 4
@@ -64,9 +84,10 @@ ActiveRecord::Schema.define(version: 20151208061853) do
     t.integer  "word_id",            limit: 4
     t.integer  "lesson_id",          limit: 4
     t.integer  "question_choice_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "order",              limit: 4
+    t.boolean  "correct",                      default: false
   end
 
   add_index "user_answers", ["lesson_id"], name: "index_user_answers_on_lesson_id", using: :btree
@@ -87,6 +108,11 @@ ActiveRecord::Schema.define(version: 20151208061853) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
+    t.datetime "avatar_updated_at"
+    t.string   "name",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -103,6 +129,7 @@ ActiveRecord::Schema.define(version: 20151208061853) do
 
   add_index "words", ["category_id"], name: "index_words_on_category_id", using: :btree
 
+  add_foreign_key "activities", "users"
   add_foreign_key "lessons", "categories"
   add_foreign_key "lessons", "users"
   add_foreign_key "question_choices", "words"

@@ -7,13 +7,19 @@
       <nav class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li>
-            <%= link_to t("label.categories"), categories_index_path %>
+            <%= link_to t("label.categories"), categories_path %>
+          </li>
+          <li>
+            <%= link_to t("label.words"), words_path %>
+          </li>
+          <li>
+            <%= link_to t("label.users"), users_path %>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
             <li>
-              <%= link_to current_user.email, current_user %>
+              <%= link_to "#{image_tag current_user.avatar.url(:small), id: "avatar", class: "no-border"} #{current_user.get_name}".html_safe, current_user %>
             </li>
             <li>
               <%= link_to t("label.sign_out"), destroy_user_session_path, method: :delete %>

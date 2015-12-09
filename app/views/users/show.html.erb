@@ -1,4 +1,45 @@
-<div class="container">
-  <h1>Users#show</h1>
-  <p>Find me in app/views/users/show.html.erb</p>
+<div id="user_show_view">
+  <div class="container">
+    <div class="row">
+      <div id="userInfo" class="col-xs-4 col-sm-3 col-lg-2">
+        <p class="text-center">
+          <%= image_tag @user.avatar.url(:med), class: "text-center" %>
+        </p>
+        <p class="text-center">
+          <%= @user.get_name %>
+        </p>
+        <p class="text-center">
+          <%= t("label.learnt_n_words", n: @user.get_number_of_words_learnt) %>
+        </p>
+        <% if is_owner? @user %>
+          <p class="text-center">
+            <%= link_to t("label.edit_profile"), edit_user_path %>
+          </p>
+        <% else %>
+          <p class="text-center">
+            <% if current_user.following? @user.id %>
+              <%= link_to t("label.unfollow"), unfollow_user_path(@user), method: :delete %>
+            <% else %>
+              <%= link_to t("label.follow"), follow_user_path(@user), method: :post %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+
+      <div id="dashBoard" class="col-xs-8 col-sm-9 col-lg-10">
+        <div id="activities">
+          <h4 id="title">
+            <%= t("label.activities") %>
+          </h4>
+          <ul id="list">
+            <% @user.get_following_activities.each do |activity| %>
+              <li>
+                <%= "#{activity.content.capitalize} - (#{get_date activity.created_at})" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
