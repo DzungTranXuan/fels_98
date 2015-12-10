@@ -77,6 +77,7 @@ puts "#{Word.count} words created together with question choices"
         word_id:            word.id,
         lesson_id:          lesson.id,
         order:              i + 1,
+        correct:            [true, false].sample,
         question_choice_id: QuestionChoice.where(word_id: word.id).sample.id
       })
   end

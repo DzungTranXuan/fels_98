@@ -27,6 +27,7 @@ en:
 
   label:
     categories: "Categories"
+    category: "Category"
     words: "Words"
     users: "Users"
     activities: "Activities"
@@ -45,10 +46,15 @@ en:
     number_of_learnt_words: "Learnt words"
     following: "Following"
 
+    all: "All"
+    learnt: "Learnt"
+    not_learnt: "Not learnt"
+
     start: "Start"
     submit: "Submit"
     previous: "Previous"
     next: "Next"
+    filter: "Filter"
 
     learnt_n_words: ! "Learnt %{n} words"
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209095015) do
+ActiveRecord::Schema.define(version: 20151211023546) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20151209095015) do
 
   add_index "followings", ["followed_user_id"], name: "index_followings_on_followed_user_id", using: :btree
   add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
+
+  create_table "learnt_word_maps", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "word_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "learnt_word_maps", ["user_id"], name: "index_learnt_word_maps_on_user_id", using: :btree
+  add_index "learnt_word_maps", ["word_id"], name: "index_learnt_word_maps_on_word_id", using: :btree
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "category_id",         limit: 4
@@ -130,6 +140,8 @@ ActiveRecord::Schema.define(version: 20151209095015) do
   add_index "words", ["category_id"], name: "index_words_on_category_id", using: :btree
 
   add_foreign_key "activities", "users"
+  add_foreign_key "learnt_word_maps", "users"
+  add_foreign_key "learnt_word_maps", "words"
   add_foreign_key "lessons", "categories"
   add_foreign_key "lessons", "users"
   add_foreign_key "question_choices", "words"

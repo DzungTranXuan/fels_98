@@ -8,11 +8,14 @@ class User < ActiveRecord::Base
   has_many :user_answers
   has_many :activities
 
+  has_many :learnt_word_maps
+  has_many :learnt_words, through: :learnt_word_maps, source: :word
+
   has_many :following_others, class_name: Following, foreign_key: :follower_id
   has_many :followed_by_others, class_name: Following, foreign_key: :followed_user_id
 
-  has_many :followers, class_name: User, through: :followed_by_others, foreign_key: :follower_id
-  has_many :followed_users, class_name: User, through: :following_others, foreign_key: :followed_user_id
+  has_many :followers, through: :followed_by_others
+  has_many :followed_users, through: :following_others
 
   validates :name, length: {maximum: 20}
 
@@ -31,8 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def get_number_of_words_learnt
-    UserAnswer.where(user_id: self.id, correct: true)
-      .count("DISTINCT word_id")
+    self.learnt_word_maps.count
   end
 
   def get_following_activities limit = nil

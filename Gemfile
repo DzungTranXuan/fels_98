@@ -37,7 +37,8 @@ gem 'mysql2'
 gem 'bullet'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
-gem "paperclip", "~> 4.3"
+gem 'paperclip', '~> 4.3'
+gem 'prawn-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
