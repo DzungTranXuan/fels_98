@@ -1,0 +1,9 @@
+<h2>
+  <%= category.name %>
+</h2>
+<p>
+  <%= category.words.map { |word| word.text }.join(' ') %>
+</p>
+<p>
+  <%= button_to t("label.start"), lessons_path, params: { category_id: category.id } %>
+</p>

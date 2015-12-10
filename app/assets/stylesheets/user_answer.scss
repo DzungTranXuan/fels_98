@@ -1,0 +1,22 @@
+#answer_show {
+  #word_info {
+    margin-top: 50px;
+  }
+
+  .choice {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  #actions {
+    margin: 20px;
+  }
+
+  #navigation {
+    margin: 20px 0;
+
+    > * {
+      margin-left: 20px;
+    }
+  }
+}
