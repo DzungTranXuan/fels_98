@@ -1,0 +1,33 @@
+<%
+  answers = @lesson.user_answers
+%>
+
+<div id="lesson_result_view">
+  <div class="container">
+    <h2>
+      <strong>
+        <%= @lesson.category.name %>
+      </strong>
+    </h2>
+    <h4>
+      <%= "#{t('label.correct')}: #{@lesson.get_number_of_correct_answers} / #{answers.count}" %>
+    </h4>
+    <table id="resultTable" class="table">
+      <% answers.each do |answer| %>
+        <tr>
+          <td class="correctIndicator">
+            <%= answer.correct ? "o" : "x" %>
+          </td>
+          <td class="word">
+            <%= answer.word.text %>
+          </td>
+          <td class="meaning">
+            <%= answer.word.get_correct_answer %>
+          </td>
+          <td class="pronunciation">
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

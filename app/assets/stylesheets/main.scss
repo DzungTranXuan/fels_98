@@ -1,5 +1,21 @@
+img {
+  border: solid 1px #eee;
+}
+
+.no-border {
+  border: none;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
 #header {
   background-color: #333;
+  #avatar {
+    margin: -12px 5px -12px 0;
+    border-radius: 16px;
+  }
 }
 
 #footer {
@@ -11,5 +27,5 @@
 }
 
 #main_content {
-  min-height: 600px;
+  min-height: 800px;
 }

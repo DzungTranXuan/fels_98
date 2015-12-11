@@ -5,5 +5,5 @@
   <%= category.words.map { |word| word.text }.join(' ') %>
 </p>
 <p>
-  <%= button_to t("label.start"), lessons_path, params: { category_id: category.id } %>
+  <%= button_to t("label.start"), lessons_path, params: {category_id: category.id} %>
 </p>

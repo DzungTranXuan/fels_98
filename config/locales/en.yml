@@ -26,14 +26,40 @@ en:
     general: "Error happend. Please try again later"
 
   label:
-    start: "Start"
     categories: "Categories"
+    category: "Category"
+    words: "Words"
+    users: "Users"
+    activities: "Activities"
+
     sign_up: "Sign up"
     sign_in: "Sign in"
     sign_out: "Sign out"
+
     progress: "Progress"
     correct_answer: "Correct answer"
+    correct: "Correct"
+    edit_profile: "Edit profile"
+    follow: "Follow"
+    unfollow: "Unfollow"
+    view_result: "View result"
+    number_of_learnt_words: "Learnt words"
+    following: "Following"
+
+    all: "All"
+    learnt: "Learnt"
+    not_learnt: "Not learnt"
+
+    start: "Start"
     submit: "Submit"
     previous: "Previous"
     next: "Next"
-    view_result: "View result"
+    filter: "Filter"
+
+    learnt_n_words: ! "Learnt %{n} words"
+
+  activity:
+    learnt_n_words_in_lesson_x: ! "learnt %{n} words in lesson %{x}"
+    follow_x: ! "follow %{x}"
+    unfollow_x: ! "unfollow %{x}"
+
