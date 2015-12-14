@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :admins
   devise_for :users
 
   get 'home/index'
@@ -15,12 +14,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories, only: [:index]
+  resources :categories
 
   resources :lessons, only: [:create] do
     get 'result'
     get 'user_answers/:order' => 'user_answers#show', as: :user_answer
     put 'user_answers/:order' => 'user_answers#update', as: :update_user_answer
+  end
+
+  namespace :admin do
+    resources :home, only: [:index]
+
+    resources :categories
+    resources :words
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

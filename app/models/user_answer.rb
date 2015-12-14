@@ -6,6 +6,8 @@ class UserAnswer < ActiveRecord::Base
 
   after_save :update_learnt_words
 
+  validates :text, presence: true, length: {maximum: 255}
+
   def update_choice choice_id
     self.question_choice_id = choice_id
     self.correct = self.question_choice.correct

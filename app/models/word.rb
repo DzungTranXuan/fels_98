@@ -1,10 +1,15 @@
 class Word < ActiveRecord::Base
   belongs_to :category
 
-  has_many :question_choices
-  has_many :user_answers
+  has_many :question_choices, dependent: :destroy
+  has_many :user_answers, dependent: :destroy
 
-  has_many :learnt_word_maps
+  has_many :learnt_word_maps, dependent: :destroy
+
+  accepts_nested_attributes_for :question_choices, allow_destroy: true
+
+  validates :text, presence: true, length: {maximum: 255}
+  validates :meaning, presence: true, length: {maximum: 255}
 
   paginates_per 20
 

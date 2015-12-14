@@ -19,8 +19,10 @@ class LessonsController < ApplicationController
   end
 
   def result
-    @lesson = Lesson.find(params[:lesson_id])
+    @lesson = Lesson.preload(user_answers: [:word]).find(params[:lesson_id])
 
     require_ownership @lesson.user_id
+
+    @lesson.finish
   end
 end

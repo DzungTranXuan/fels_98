@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include Authorization
 
-  before_action :require_login, only: [:edit, :update, :follow, :unfollow]
+  before_action :require_login
   before_action ->{require_ownership params[:id].to_i}, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
 

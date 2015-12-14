@@ -2,11 +2,30 @@ class Lesson < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  has_many :user_answers
+  has_many :user_answers, dependent: :destroy
 
   before_save :create_questions
 
 
+  def finish
+    correct_num = self.get_number_of_correct_answers
+
+    if correct_num > 0
+      Activity.add({
+        type: "learn",
+        user_id: self.user_id,
+        content: I18n.t("activity.learnt_n_words_in_lesson_x", n: correct_num, x: self.category.name)
+      })
+    end
+
+    self
+  end
+
+  def get_number_of_correct_answers
+    self.user_answers.where(correct: true).count
+  end
+
+  private
   def create_questions
     words = self.category.words.sample(self.number_of_questions)
 
@@ -20,19 +39,5 @@ class Lesson < ActiveRecord::Base
         }
       end
     )
-  end
-
-  def finish
-    if self.get_number_of_correct_answers > 0
-      Activity.add({
-        type: "learn",
-        user_id: self.user_id,
-        content: I18n.t("activity.learnt_n_words_in_lesson_x", n: correct_num, x: self.category.name)
-      })
-    end
-  end
-
-  def get_number_of_correct_answers
-    self.user_answers.where(correct: true).count
   end
 end

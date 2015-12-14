@@ -1,18 +1,5 @@
 <%= form_for user, html: {multipart: true, class: "form-horizontal"} do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h4>
-        <%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:
-      </h4>
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li>
-            <%= message %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "shared/form_errors", resource: user %>
 
   <div class="form-group">
     <%= f.label :name, class: "col-sm-2 control-label" %>

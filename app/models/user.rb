@@ -4,15 +4,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :lessons
-  has_many :user_answers
-  has_many :activities
+  has_many :lessons, dependent: :destroy
+  has_many :user_answers, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
-  has_many :learnt_word_maps
-  has_many :learnt_words, through: :learnt_word_maps, source: :word
+  has_many :learnt_word_maps, dependent: :destroy
+  has_many :learnt_words, through: :learnt_word_maps, source: :word, dependent: :destroy
 
-  has_many :following_others, class_name: Following, foreign_key: :follower_id
-  has_many :followed_by_others, class_name: Following, foreign_key: :followed_user_id
+  has_many :following_others, class_name: Following, foreign_key: :follower_id, dependent: :destroy
+  has_many :followed_by_others, class_name: Following, foreign_key: :followed_user_id, dependent: :destroy
 
   has_many :followers, through: :followed_by_others
   has_many :followed_users, through: :following_others
@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
       .sort_by {|activity| activity.id}
       .reverse
       .first(20)
+  end
+
+  def get_activities
+    self.activities.order(id: :DESC).limit(20)
   end
 
   def follow user_id
