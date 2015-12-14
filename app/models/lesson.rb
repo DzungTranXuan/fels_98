@@ -39,5 +39,7 @@ class Lesson < ActiveRecord::Base
         }
       end
     )
+
+    byebug
   end
 end

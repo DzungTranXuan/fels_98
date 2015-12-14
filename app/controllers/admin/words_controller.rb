@@ -49,21 +49,14 @@ class Admin::WordsController < ApplicationController
 
   private
   def word_params
-<<<<<<< HEAD
-<<<<<<< HEAD
     params.require(:word)
       .permit(
         :text,
         :meaning,
         :category_id,
+        :pronunciation,
         question_choices_attributes: [:id, :text, :correct, :_destroy]
       )
-=======
-    params.require(:word).permit(:text, :meaning, :category_id)
->>>>>>> Admin functionality
-=======
-    params.require(:word).permit(:text, :meaning, :category_id, :pronunciation)
->>>>>>> Add pronunciation for words
   end
 
   def set_word
