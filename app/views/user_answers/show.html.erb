@@ -16,6 +16,7 @@
           <h1>
             <%= @answer.word.text %>
           </h1>
+          <%= render "shared/word_pronunciation_player", word: @answer.word %>
           <% if @answer.question_choice_id.present? %>
             <div>
               <%= "#{t('label.correct_answer')}: #{@answer.word.meaning}" %>

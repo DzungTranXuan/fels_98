@@ -24,6 +24,9 @@
               <%= t("label.choices") %>
             </th>
             <th>
+              <%= t("label.pronunciation") %>
+            </th>
+            <th>
               <%= t("label.updated") %>
             </th>
             <th>
@@ -48,10 +51,10 @@
                 <%= word.question_choices.map {|question_choice| question_choice.text}.join(' / ') %>
               </td>
               <td>
-                <%= get_date word.updated_at %>
+                <%= render "shared/word_pronunciation_player", word: word %>
               </td>
               <td>
-                <%= get_date word.created_at %>
+                <%= get_date word.updated_at %>
               </td>
               <td>
                 <%= link_to t("label.edit"), edit_admin_word_path(word) %>

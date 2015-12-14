@@ -11,6 +11,11 @@ class Word < ActiveRecord::Base
   validates :text, presence: true, length: {maximum: 255}
   validates :meaning, presence: true, length: {maximum: 255}
 
+  has_attached_file :pronunciation, default_url: nil
+  validates_attachment :pronunciation,
+    content_type: {content_type: ["audio/mp3", "audio/mpeg"]},
+    size: [in: 0..1000.kilobytes]
+
   paginates_per 20
 
   FILTERS = [
