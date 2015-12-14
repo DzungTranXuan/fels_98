@@ -51,6 +51,9 @@
                 <%= get_date word.updated_at %>
               </td>
               <td>
+                <%= get_date word.created_at %>
+              </td>
+              <td>
                 <%= link_to t("label.edit"), edit_admin_word_path(word) %>
                 <%= link_to t("label.delete"), admin_word_path(word), method: :delete %>
               </td>
