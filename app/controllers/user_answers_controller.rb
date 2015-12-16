@@ -20,7 +20,7 @@ class UserAnswersController < ApplicationController
   end
 
   def update
-    if !@answer.submit params[:choice_id]
+    unless @answer.submit params[:choice_id]
       flash[:error] = I18n.t "error.general"
     end
 

@@ -16,6 +16,7 @@
           <h1>
             <%= @answer.word.text %>
           </h1>
+          <%= render "shared/word_pronunciation_player", word: @answer.word %>
           <% if @answer.question_choice_id.present? %>
             <div>
               <%= "#{t('label.correct_answer')}: #{@answer.word.meaning}" %>
@@ -53,7 +54,7 @@
             <%= link_to t("label.previous"), lesson_user_answer_path(@answer.lesson_id, @answer.order - 1) %>
           <% end %>
 
-          <% if @answer.order < @answer.lesson.number_of_questions %>
+          <% if !@answer.is_last_question? %>
             <%= link_to t("label.next"), lesson_user_answer_path(@answer.lesson_id, @answer.order + 1) %>
           <% else %>
             <%= link_to t("label.view_result"), lesson_path(@answer.lesson_id) %>
