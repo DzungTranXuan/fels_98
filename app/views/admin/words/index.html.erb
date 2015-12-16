@@ -1,0 +1,71 @@
+<div id="admin_words_index_view">
+  <div class="container">
+    <div class="row">
+      <%= link_to "Create new word", new_admin_word_path, class: "btn btn-primary" %>
+
+      <% if @words.blank? %>
+        <%= t("word.not_found") %>
+      <% else %>
+        <table class="table">
+          <thead>
+            <th>
+              <%= t("label.no") %>
+            </th>
+            <th>
+              <%= t("label.word") %>
+            </th>
+            <th>
+              <%= t("label.meaning") %>
+            </th>
+            <th>
+              <%= t("label.category") %>
+            </th>
+            <th>
+              <%= t("label.choices") %>
+            </th>
+            <th>
+              <%= t("label.pronunciation") %>
+            </th>
+            <th>
+              <%= t("label.updated") %>
+            </th>
+            <th>
+              <%= t("label.actions") %>
+            </th>
+          </thead>
+          <% @words.each_with_index do |word, i| %>
+            <tr>
+              <td>
+                <%= i + 1 %>
+              </td>
+              <td>
+                <%= word.text %>
+              </td>
+              <td>
+                <%= word.meaning %>
+              </td>
+              <td>
+                <%= word.category.try(:name) %>
+              </td>
+              <td>
+                <%= word.question_choices.map {|question_choice| question_choice.text}.join(' / ') %>
+              </td>
+              <td>
+                <%= render "shared/word_pronunciation_player", word: word %>
+              </td>
+              <td>
+                <%= get_date word.updated_at %>
+              </td>
+              <td>
+                <%= link_to t("label.edit"), edit_admin_word_path(word) %>
+                <%= link_to t("label.delete"), admin_word_path(word), method: :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+
+        <%= paginate @words %>
+      <% end %>
+    </div>
+  </div>
+</div>

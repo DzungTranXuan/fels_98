@@ -1,0 +1,56 @@
+<div id="admin_categories_index_view">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= link_to "Create new category", new_admin_category_path, class: "btn btn-primary" %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <%= t("label.category") %>
+              </th>
+              <th>
+                <%= t("label.words") %>
+              </th>
+              <th>
+                <%= t("label.updated") %>
+              </th>
+              <th>
+                <%= t("label.created") %>
+              </th>
+              <th>
+                <%= t("label.actions") %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @categories.each do |category| %>
+              <tr>
+                <td>
+                  <%= image_tag category.cover_photo.url(:med) %>
+                  <%= category.name %>
+                </td>
+                <td>
+                  <%= "#{category.words.count} #{t("label.words").downcase}:" %>
+                  <%= "#{category.words[0..20].map {|word| word.text}.join(' ')}..." %>
+                </td>
+                <td>
+                  <%= get_date category.updated_at %>
+                </td>
+                <td>
+                  <%= get_date category.created_at %>
+                </td>
+                <td>
+                  <%= link_to t("label.edit"), edit_admin_category_path(category) %>
+                  <%= link_to t("label.delete"), admin_category_path(category), method: :delete %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <%= paginate @categories %>
+      </div>
+    </div>
+  </div>
+</div>
