@@ -11,7 +11,7 @@ puts 'SEEDING...'
 ###### ========================================================================
 
 5.times do |i|
-  user = User.create({email: "user#{i}@framgia.com", password: '12345678'})
+  user = User.create({email: "user#{i}@framgia.com", password: '12345678', is_admin: true})
 end
 
 puts "#{User.count} users created"
@@ -20,18 +20,10 @@ user_ids = User.all.pluck(:id)
 
 ###### ========================================================================
 
-2.times do |i|
-  admin = Admin.create({email: "admin#{i}@framgia.com", password: '12345678'})
-end
-
-puts "#{Admin.count} admins created"
-
-###### ========================================================================
-
 categories = Category.create([
-  {name: 'Basic 500', cover_photo: '1.jpg'},
-  {name: 'Essential 1000', cover_photo: '2.jpg'},
-  {name: 'Usual 3000', cover_photo: '3.jpg'}
+  {name: 'Basic 500', cover_photo: nil},
+  {name: 'Essential 1000', cover_photo: nil},
+  {name: 'Usual 3000', cover_photo: nil}
 ])
 
 puts "#{Category.count} categories created"
@@ -42,10 +34,9 @@ category_ids = Category.all.pluck(:id)
 
 100.times do
   word = Word.create({
-    category_id:        category_ids.sample,
-    text:               Faker::Lorem.word,
-    meaning:            Faker::Lorem.word,
-    pronunciation_file: nil
+    category_id:  category_ids.sample,
+    text:         Faker::Lorem.word,
+    meaning:      Faker::Lorem.word
   })
 
   correct_choice = rand(0..3)

@@ -1,0 +1,17 @@
+<%= form_for [:admin, category], html: {multipart: true} do |f| %>
+  <%= render "shared/form_errors", resource: category %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cover_photo %>
+    <%= f.file_field :cover_photo %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit t("label.save"), class: "btn btn-primary" %>
+  </div>
+<% end %>

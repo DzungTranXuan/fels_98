@@ -20,17 +20,24 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  success:
+    create: "Created successfully"
+    update: "Updated successfully"
+    delete: "Deleted successfully"
 
   error:
-    general: "Error happend. Please try again later"
+    general: "Error happened. Please try again later"
+    input_invalid: "Input is invalid"
 
   label:
     categories: "Categories"
     category: "Category"
     words: "Words"
+    word: "Word"
     users: "Users"
     activities: "Activities"
+    choices: "Choices"
+    pronunciation: "Pronunciation"
 
     sign_up: "Sign up"
     sign_in: "Sign in"
@@ -45,6 +52,7 @@ en:
     view_result: "View result"
     number_of_learnt_words: "Learnt words"
     following: "Following"
+    admin: "Admin"
 
     all: "All"
     learnt: "Learnt"
@@ -55,8 +63,29 @@ en:
     previous: "Previous"
     next: "Next"
     filter: "Filter"
+    add: "Add"
+    remove: "Remove"
+    save: "Save"
+    edit: "Edit"
+    delete: "Delete"
+    pdf: "PDF"
+
+    created: "Created"
+    updated: "Updated"
+    actions: "Actions"
+
+    manage_categories: "Manage categories"
+    manage_words: "Manage words"
+    select_category: "Select category"
+    question_choices: "Question choices"
 
     learnt_n_words: ! "Learnt %{n} words"
+
+  category:
+    not_found: "No categories found"
+
+  word:
+    not_found: "No words found"
 
   activity:
     learnt_n_words_in_lesson_x: ! "learnt %{n} words in lesson %{x}"

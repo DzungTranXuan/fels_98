@@ -9,11 +9,22 @@
           <li>
             <%= link_to t("label.categories"), categories_path %>
           </li>
+          <li>
+            <%= link_to t("label.words"), words_path %>
+          </li>
+          <li>
+            <%= link_to t("label.users"), users_path %>
+          </li>
+          <% if user_signed_in? && current_user.is_admin %>
+            <li>
+              <%= link_to t("label.admin"), admin_home_index_path %>
+            </li>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
             <li>
-              <%= link_to current_user.email, current_user %>
+              <%= link_to "#{image_tag current_user.avatar.url(:small), id: "avatar", class: "no-border"} #{current_user.get_name}".html_safe, current_user %>
             </li>
             <li>
               <%= link_to t("label.sign_out"), destroy_user_session_path, method: :delete %>

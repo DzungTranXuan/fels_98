@@ -6,6 +6,12 @@ module Authorization
     end
   end
 
+  def require_admin
+    if current_user.blank? || !current_user.is_admin
+      head 403
+    end
+  end
+
   def require_ownership user_id
     if current_user.blank? || current_user.id != user_id
       head 403

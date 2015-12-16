@@ -1,0 +1,38 @@
+<%= form_for [:admin, word] do |f| %>
+  <%= render "shared/form_errors", resource: word %>
+
+  <div class="form-group">
+    <%= f.label :text %>
+    <%= f.text_field :text, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :meaning %>
+    <%= f.text_field :meaning, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pronunciation %>
+    <%= f.file_field :pronunciation %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category %>
+    <br/>
+    <%= collection_select(:word, :category_id, Category.all, :id, :name, prompt: t("label.select_category")) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label t("label.question_choices") %>
+    <%= f.fields_for :question_choices do |f| %>
+      <%= render "question_choice_fields", f: f %>
+    <% end %>
+
+    <%= link_to_add_fields t("label.add"), f, :question_choices %>
+
+  </div>
+
+  <div class="form-group">
+    <%= f.submit t("label.save"), class: "btn btn-primary" %>
+  </div>
+<% end %>
