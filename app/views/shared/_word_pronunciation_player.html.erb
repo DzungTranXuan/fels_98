@@ -1,0 +1,6 @@
+<% if word.pronunciation.present? %>
+  <%= audio_tag word.pronunciation.url(:original), class: "audio-play" %>
+  <button class="btn btn-default btn-xs audio-btn">
+    <span class="glyphicon glyphicon-volume-up"></span> Play
+  </button>
+<% end %>

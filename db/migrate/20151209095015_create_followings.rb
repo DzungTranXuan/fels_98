@@ -5,6 +5,6 @@ class CreateFollowings < ActiveRecord::Migration
     end
 
     add_reference :followings, :follower, references: :users, index: true
-    add_reference :followings, :followed_user, references: :users, index: true
+    add_reference :followings, :user, references: :users, index: true
   end
 end

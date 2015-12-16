@@ -19,12 +19,12 @@ class User < ActiveRecord::Base
 
   validates :name, length: {maximum: 20}
 
-  # has_attached_file :avatar,
-  #   styles: {small: "32x32", med: "100x100", large: "200x200"},
-  #   default_url: "/photos/avatars/:style/missing.png"
-  # validates_attachment :avatar,
-  #   content_type: {content_type: ["image/jpeg", "image/png"]},
-  #   size: {in: 0..2000.kilobytes}
+  has_attached_file :avatar,
+    styles: {small: "32x32", med: "100x100", large: "200x200"},
+    default_url: "/photos/avatars/:style/missing.png"
+  validates_attachment :avatar,
+    content_type: {content_type: ["image/jpeg", "image/png"]},
+    size: {in: 0..2000.kilobytes}
 
   paginates_per 10
 
