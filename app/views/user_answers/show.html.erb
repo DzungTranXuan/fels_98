@@ -37,7 +37,7 @@
       <div class="col-xs-12">
         <div id="actions" class="text-center">
           <% if @answer.question_choice_id.blank? %>
-            <%= form_tag lesson_update_answer_path(@answer.lesson_id, @answer.order), method: :put do %>
+            <%= form_tag lesson_update_user_answer_path(@answer.lesson_id, @answer.order), method: :put do %>
               <%= hidden_field_tag 'choice_id' %>
               <%= submit_tag t("label.submit"), id: "answer_submit_btn", class: "btn btn-primary btn-lg", disabled: true %>
             <% end %>
@@ -50,13 +50,13 @@
       <div class="col-xs-12">
         <div id="navigation" class="text-right">
           <% if @answer.order > 1 %>
-            <%= link_to t("label.previous"), lesson_show_question_path(@answer.lesson_id, @answer.order - 1) %>
+            <%= link_to t("label.previous"), lesson_user_answer_path(@answer.lesson_id, @answer.order - 1) %>
           <% end %>
 
           <% if @answer.order < @answer.lesson.number_of_questions %>
-            <%= link_to t("label.next"), lesson_show_question_path(@answer.lesson_id, @answer.order + 1) %>
+            <%= link_to t("label.next"), lesson_user_answer_path(@answer.lesson_id, @answer.order + 1) %>
           <% else %>
-            <%= link_to t("label.view_result"), lesson_result_path(@answer.lesson_id) %>
+            <%= link_to t("label.view_result"), lesson_path(@answer.lesson_id) %>
           <% end %>
         </div>
       </div>
