@@ -18,23 +18,13 @@
           <%= form_tag words_path, method: :get, class: "text-center" do %>
             <div class="form-group">
               <%= label_tag t("label.category") %>
-              <%=
-                select_tag(
-                  t("label.category"),
-                  options_from_collection_for_select(categories, "id", "name", selected_category)
-                )
-              %>
+              <%= select_tag("category", options_from_collection_for_select(categories, "id", "name", selected_category)) %>
             </div>
 
             <div class="radio">
               <% filters.each do |filter| %>
                 <% selected = @data[:selected_filter_id] == filter[:id] %>
-                <%=
-                  label_tag(
-                    t("label.filter"),
-                    "#{radio_button_tag("filter", filter[:id], selected)} #{t("label.#{filter[:key]}")}".html_safe
-                  )
-                %>
+                <%= label_tag t("label.filter"), "#{radio_button_tag("filter", filter[:id], selected)} #{t("label.#{filter[:key]}")}".html_safe %>
               <% end %>
             </div>
 

@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
 
   paginates_per 10
 
-  def get_activities
-    self.activities.last(10).reverse
-  end
-
   def get_number_of_words_learnt
     self.learnt_word_maps.count
   end
